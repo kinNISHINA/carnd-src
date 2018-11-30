@@ -1,12 +1,17 @@
+import rospy
 import numpy as np
 import tensorflow as tf
 from PIL import Image
 from styx_msgs.msg import TrafficLight
+import yaml
 
 class TLClassifier(object):
     def __init__(self):
         #TODO load classifier
-        MODEL_NAME = 'ssd_styx'
+        config_string = rospy.get_param("/traffic_light_config")
+        self.config = yaml.load(config_string)
+        MODEL_NAME = 'ssd_site' if self.config['is_site'] else 'ssd_styx'
+        # rospy.logwarn("is_site: {0}".format(self.config['is_site']))
         PATH_TO_MODEL = 'model/' + MODEL_NAME + '/frozen_inference_graph.pb'
         self.detection_graph = tf.Graph()
         with self.detection_graph.as_default():
