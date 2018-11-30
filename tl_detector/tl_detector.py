@@ -140,13 +140,14 @@ class TLDetector(object):
 
         if(not self.has_image):
             self.prev_light_loc = None
-            return False
+            return TrafficLight.UNKNOWN
 
         self.count += 1
-        if self.count == 9:
+        if self.count == 3:
             cv_image = self.bridge.imgmsg_to_cv2(self.camera_image, "bgr8")
+            result = self.light_classifier.get_classification(cv_image)
             self.count = 0
-            return self.light_classifier.get_classification(cv_image)
+            return result
             
 
         # cv_image = self.bridge.imgmsg_to_cv2(self.camera_image, "bgr8")
