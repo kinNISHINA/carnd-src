@@ -101,6 +101,7 @@ class TLDetector(object):
             self.upcoming_red_light_pub.publish(Int32(light_wp))
         else:
             self.upcoming_red_light_pub.publish(Int32(self.last_wp))
+            rospy.logwarn("BRAKE")
         self.state_count += 1
 
     def get_closest_waypoint(self, x, y):
