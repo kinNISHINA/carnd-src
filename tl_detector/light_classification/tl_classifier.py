@@ -6,7 +6,6 @@ from styx_msgs.msg import TrafficLight
 class TLClassifier(object):
     def __init__(self):
         #TODO load classifier
-        def __init__(self):
         MODEL_NAME = 'ssd_styx'
         PATH_TO_MODEL = 'model/' + MODEL_NAME + '/frozen_inference_graph.pb'
         self.detection_graph = tf.Graph()
@@ -31,7 +30,7 @@ class TLClassifier(object):
 
         Returns:
             int: ID of traffic light color (specified in styx_msgs/TrafficLight)
-
+    
         """
         #TODO implement light color prediction
         with self.detection_graph.as_default():
